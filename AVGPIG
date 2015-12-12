@@ -1,0 +1,7 @@
+L1 = LOAD '/user/hduser/PBL/avgcost.csv' USING PigStorage(',');
+L2 = FILTER L1 BY($0==' ');
+L3 = FOREACH L2 GENERATE $1,$2;
+L4 = GROUP L3 BY $0;
+L5 = FOREACH L4 GENERATE $0,SUM($1.$1),COUNT($1);
+L6 = FOREACH L5 GENERATE $0,(float)$1/$2;
+STORE L6 INTO '/user/hduser/PBLOUT2' USING PigStorage(',');

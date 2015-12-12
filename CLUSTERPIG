@@ -1,0 +1,6 @@
+S1 = LOAD '/user/hduser/PBL/source.csv' USING PigStorage(',');
+S2 = FILTER S1 BY $5==' ';
+S3 = FOREACH S2 GENERATE $1,$8;
+S4 = GROUP S3 BY $0;
+S5 = FOREACH S4 GENERATE $0,SUM($1.$1);
+STORE S5 INTO '/user/hduser/PBLOUT2' USING PigStorage(',');

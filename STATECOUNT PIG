@@ -1,0 +1,4 @@
+T2 = FILTER T1 BY ($0 == ' ');
+T3 = FOREACH T2 GENERATE $1,$2;
+T4 = GROUP T3 BY $0;
+STORE T4 INTO '/user/hduser/PBLOUT2' USING PigStorage(',');
